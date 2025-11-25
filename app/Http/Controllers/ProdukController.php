@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\Kategori;
-
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -14,7 +13,7 @@ class ProdukController extends Controller
     public function index()
     {
         $produks = Produk::with('kategori')->get();
-        return view('produk.index', compact('produks'));
+        return view('admin.produk.index', compact('produks'));
     }
 
     /**
@@ -23,7 +22,7 @@ class ProdukController extends Controller
     public function create()
     {
         $kategoris = Kategori::all();
-        return view('produk.create', compact('kategoris'));
+        return view('admin.produk.create', compact('kategoris'));
     }
 
     /**
@@ -37,16 +36,15 @@ class ProdukController extends Controller
             'deskripsi' => 'nullable|string',
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
-            'gambar' => 'nullable|image|max:2048',
+            'gambar' => 'required',
         ]);
 
-        if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('produk_gambar', 'public');
-        }
+        // Gambar bisa berupa URL string atau akan di-sanitasi
+        $validated['gambar'] = $request->gambar;
 
         Produk::create($validated);
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
@@ -64,7 +62,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id);
         $kategoris = Kategori::all();
-        return view('produk.edit', compact('produk', 'kategoris'));
+        return view('admin.produk.edit', compact('produk', 'kategoris'));
     }
 
     /**
@@ -78,19 +76,20 @@ class ProdukController extends Controller
             'deskripsi' => 'nullable|string',
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
-            'gambar' => 'nullable|image|max:2048',
+            'gambar' => 'nullable|string',
         ]);
 
         $produk = Produk::findOrFail($id);
         $data = $request->all();
 
-        if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('produk_gambar', 'public');
+        // Jika gambar tidak diisi, tetap gunakan gambar lama
+        if (empty($data['gambar'])) {
+            unset($data['gambar']);
         }
 
         $produk->update($data);
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui.');
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil diperbarui');
     }
 
     /**
@@ -101,6 +100,6 @@ class ProdukController extends Controller
         $produk = Produk::findOrFail($id);
         $produk->delete();
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus.');
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil dihapus.');
     }
 }

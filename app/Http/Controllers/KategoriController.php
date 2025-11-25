@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Models\Kategori;
-
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -13,7 +12,7 @@ class KategoriController extends Controller
     public function index()
     {
         $kategoris = Kategori::all(); 
-        return view('kategori.index', compact('kategoris'));
+        return view('admin.kategori.index', compact('kategoris'));
     }
 
     /**
@@ -21,7 +20,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('kategori.create');
+        return view('admin.kategori.create');
     }
 
     /**
@@ -37,7 +36,7 @@ class KategoriController extends Controller
             'nama' => $request->nama,
         ]);
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     /**
@@ -54,7 +53,7 @@ class KategoriController extends Controller
     public function edit(string $id)
     {
         $kategori = Kategori::findOrFail($id);
-        return view('kategori.edit', compact('kategori'));
+        return view('admin.kategori.edit', compact('kategori'));
     }
 
     /**
@@ -71,7 +70,7 @@ class KategoriController extends Controller
             'nama' => $request->nama,
         ]); 
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui.');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil diperbarui.');
     }
 
     /**
@@ -82,6 +81,6 @@ class KategoriController extends Controller
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus.');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }

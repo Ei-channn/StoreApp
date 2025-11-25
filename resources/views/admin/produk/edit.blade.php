@@ -5,7 +5,7 @@
 @section('content')
     <h1>Edit Produk</h1>
 
-    <form action="{{ route('produk.update', $produk->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.produk.update', $produk->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -34,8 +34,19 @@
         </div>
 
         <div class="mb-3">
-            <label>Gambar</label>
-            <input teks="file" name="gambar" class="form-control">
+            <label>Gambar Saat Ini</label>
+            @if($produk->gambar)
+                <div class="mb-2">
+                    <img src="{{ $produk->gambar }}" alt="{{ $produk->nama }}" style="max-width: 200px; max-height: 150px; object-fit: cover;">
+                </div>
+            @else
+                <div class="mb-2 text-muted">Tidak ada gambar</div>
+            @endif
+        </div>
+
+        <div class="mb-3">
+            <label>Gambar (Update dengan URL atau File Path)</label>
+            <input type="text" name="gambar" class="form-control" placeholder="https://example.com/image.jpg" value="{{ old('gambar', $produk->gambar) }}" required>
         </div>
 
         <div class="mb-3">
@@ -44,6 +55,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('produk.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 @endsection

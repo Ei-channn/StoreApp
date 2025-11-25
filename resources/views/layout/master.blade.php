@@ -9,11 +9,11 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="#">Toko Kita</a>
+            <a class="navbar-brand" href="{{route('admin.index')}}">Toko Kita</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('kategori.index') }}">Kategori</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('produk.index') }}">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.produk.index') }}">Produk</a></li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
