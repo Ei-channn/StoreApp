@@ -10,7 +10,23 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     @include('layout.header')
+=======
+    <header class="main-header">
+        <div class="logo">StoreApp</div>
+        <nav>
+            <a href="{{ route('user.index') }}">Beranda</a>
+            <a href="#">Produk</a>
+            <a href="#">Kontak</a>
+        </nav>
+        @php
+            $cart = session('cart', []);
+            $cartCount = collect($cart)->sum('qty');
+        @endphp
+        <a href="{{ route('user.keranjang') }}">🛒 Keranjang (<span id="cart-count">{{ $cartCount }}</span>)</a>
+    </header>
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
     <div class="container py-4">
         <h1>Keranjang Belanja</h1>
 
@@ -25,7 +41,13 @@
             <div class="alert alert-info">Keranjang kosong. <a href="{{ route('user.index') }}">Belanja sekarang</a>
             </div>
         @else
+<<<<<<< HEAD
             <div class="cart-container" id="cartContainer">
+=======
+            <!-- CART CONTAINER -->
+            <div class="cart-container" id="cartContainer">
+                <!-- CART ITEMS -->
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
                 <div class="cart-items">
                     <div class="cart-header">
                         <h1>Keranjang Belanja</h1>
@@ -70,6 +92,11 @@
                         @endforeach
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+                <!-- CART SUMMARY -->
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
                 <div class="cart-summary">
                     <h2 class="summary-title">Ringkasan Belanja</h2>
 
@@ -100,7 +127,11 @@
                     <div class="promo-code">
                         <div class="promo-input-group">
                             <input type="text" class="promo-input" placeholder="Kode Promo" id="promoInput">
+<<<<<<< HEAD
                             <button class="promo-btn">Terapkan</button>
+=======
+                            <button class="promo-btn" onclick="applyPromo()">Terapkan</button>
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
                         </div>
                     </div>
 
@@ -113,6 +144,11 @@
                 </div>
             </div>
         @endif
+<<<<<<< HEAD
+=======
+
+        <a href="{{ route('user.index') }}" class="btn btn-link mt-3">Kembali ke Toko</a>
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
     </div>
 </body>
 

@@ -47,8 +47,11 @@ nav a:hover {
 .cart-icon {
     font-weight: bold;
     cursor: pointer;
+<<<<<<< HEAD
     display: flex;
     gap: 50px;
+=======
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
 }
 
 /* HERO SECTION */

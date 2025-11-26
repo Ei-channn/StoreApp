@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role', ['admin', 'user'])->default('user');
+<<<<<<< HEAD
             $table->rememberToken();
+=======
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
             $table->timestamps();
         });
 

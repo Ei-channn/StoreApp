@@ -9,8 +9,26 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     @include('layout.header')
     <br><br>
+=======
+    <header class="main-header">
+        <div class="logo">StoreApp</div>
+        <nav>
+            <a href="{{ route('user.index') }}">Beranda</a>
+            <a href="#">Produk</a>
+            <a href="#">Kontak</a>
+        </nav>
+        <div class="cart-icon">
+            @php
+                $cart = session('cart', []);
+                $cartCount = collect($cart)->sum('qty');
+            @endphp
+            <a href="{{ route('user.keranjang') }}">🛒 Keranjang (<span id="cart-count">{{ $cartCount }}</span>)</a>
+        </div>
+    </header>
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
 
     <div class="product-detail">
         <div class="product-detail-content">
@@ -31,6 +49,7 @@
 
                 <p class="product-description">{{ $produk->deskripsi }}</p>
 
+<<<<<<< HEAD
                 <form action="{{ route('user.keranjang.add') }}" method="POST" id="add-to-cart-form">
                     @csrf
                     <div class="quantity-controls">
@@ -47,6 +66,24 @@
                         <button type="button" class="buy-now-btn">Beli Sekarang</button>
                     </div>
                 </form>
+=======
+                <div class="quantity-controls">
+                    <form action="{{ route('user.keranjang.add') }}" method="POST" style="margin-right:16px;">
+                        @csrf
+                        <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                        <input type="number" class="quantity-input" value="1" min="1"
+                            max="{{ $produk->stok }}" id="quantity">
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        <input type="hidden" name="product_id" value="{{ $produk->id }}">
+                    </form>
+                    <span class="stock-info">Stok: {{ $produk->stok }} tersedia</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button type="submit" class="add-to-cart-btn">Tambah ke Keranjang</button>
+                <button type="button" class="buy-now-btn">Beli Sekarang</button>
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
             </div>
         </div>
     </div>
@@ -54,6 +91,7 @@
     <footer style="padding:16px; text-align:center;">
         <p>&copy; 2025 StoreApp. Hak Cipta Dilindungi.</p>
     </footer>
+<<<<<<< HEAD
 </body>
 
 </html>
@@ -78,3 +116,27 @@
         }
     });
 </script>
+=======
+
+    <script>
+        let quantityInput = document.getElementById('quantity');
+
+        function decreaseQuantity() {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+
+        function increaseQuantity() {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue < {{ $produk->stok }}) {
+                quantityInput.value = currentValue + 1;
+            }
+        }
+    </script>
+</body>
+
+</html>
+--}}
+>>>>>>> 6f7eed0abc486500d07b7cc398c5c840bd7c88a5
